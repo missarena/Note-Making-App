@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>My Notes | Note Making App</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <style>
+        body {
+            background-color: #121212;
+            color: white;
+        }
+        .sidebar {
+            min-height: 100vh;
+            background: #1f1f1f;
+        }
+        .sidebar a {
+            color: white;
+            text-decoration: none;
+            display: block;
+            padding: 12px;
+            border-radius: 8px;
+            margin-bottom: 4px;
+        }
+        .sidebar a:hover {
+            background: rgba(255,255,255,0.2);
+        }
+        .note-card {
+            border-radius: 15px;
+            margin-bottom: 20px;
+            background-color: #1f1f1f;
+            padding: 20px;
+        }
+        .note-card h5 {
+            color: #fff;
+        }
+        .note-card p {
+            color: #ccc;
+        }
+        .note-actions a {
+            margin-right: 10px;
+        }
+    </style>
+</head>
+
+<body>
+
+<!-- NAVBAR -->
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <div class="container-fluid">
+        <span class="navbar-brand">Note Making App</span>
+        <a th:href="@{/logout}" class="btn btn-outline-light btn-sm">Logout</a>
+    </div>
+</nav>
+
+<div class="container-fluid">
+    <div class="row">
+
+        <!-- SIDEBAR -->
+        <div class="col-md-2 sidebar p-3">
+            <h5 class="mb-4">Dashboard</h5>
+            <a href="#">📒 My Notes</a>
+            <a th:href="@{/notes/new}">➕ Add New Note</a>
+            <a href="#">⚙ Settings</a>
+        </div>
+
+        <!-- MAIN CONTENT -->
+        <div class="col-md-10 p-4">
+            <h3>Your Notes</h3>
+            <div th:if="${#lists.isEmpty(notes)}">
+                <p>You have no notes yet. Click "Add New Note" to create one.</p>
+            </div>
+            <div class="row" th:each="note : ${notes}">
+                <div class="col-md-6">
+                    <div class="note-card">
+                        <h5 th:text="${note.title}">Note Title</h5>
+                        <p th:text="${note.content}">Note content goes here...</p>
+                        <div class="note-actions">
+                            <a th:href="@{/notes/edit/{id}(id=${note.id})}" class="btn btn-sm btn-primary">Edit</a>
+                            <!-- CORRECT -->
+                            <a th:href="@{/notes/delete/{id}(id=${note.id})}" class="btn btn-sm btn-danger">Delete</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<!-- Bootstrap JS -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
