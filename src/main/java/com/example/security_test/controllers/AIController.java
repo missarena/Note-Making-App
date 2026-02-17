@@ -31,11 +31,25 @@ public class AIController {
             return "error";
         }
 
-        String summary = aiService.summarize(note.getContent());
-
+        String content=note.getContent();
+        if(content == null) {
+            return "Note is Empty,cannot summarize";
+        }
+        if(content.length()>4000){
+            content=content.substring(0, 4000);
+        }
+        String summary = aiService.summarize(content,noteId);
         model.addAttribute("note", note);
         model.addAttribute("summary", summary);
         return "summary";
+    }
+
+    @GetMapping("/summary/{noteId}")
+    public String getSummary(@PathVariable Long noteId,Model model) {
+        String summary=aiService.getLatestSummary(noteId);
+        model.addAttribute("summary", summary);
+        model.addAttribute("noteId", noteId);
+        return "ai-summary";
     }
 
 }

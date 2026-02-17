@@ -51,7 +51,7 @@
 <!-- NAVBAR -->
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
     <div class="container-fluid">
-        <span class="navbar-brand">Note Making App</span>
+        <span class="navbar-brand">StudyIt - An AI powered study assistant</span>
         <a th:href="@{/logout}" class="btn btn-outline-light btn-sm">Logout</a>
     </div>
 </nav>
@@ -82,7 +82,8 @@
                             <a th:href="@{/notes/edit/{id}(id=${note.id})}" class="btn btn-sm btn-primary">Edit</a>
                             <!-- CORRECT -->
                             <a th:href="@{/notes/delete/{id}(id=${note.id})}" class="btn btn-sm btn-danger">Delete</a>
-                            <a th:href="@{/ai/summarize/{id}(id=${note.id})}" class="btn btn-sm"> Summarize with AI</a>
+                            <a th:href="@{/ai/summarize/{id}(id=${note.id})}" class="btn btn-sm bg-light"> Summarize with AI</a>
+                            <a th:href="@{/ai/summary/{id}(id=${note.id})}" class="btn btn-sm bg-light">Saved AI summary</a>
                         </div>
                     </div>
                 </div>
