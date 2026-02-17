@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>AI Summary</title>
+
+    <style>
+        body {
+            background-color: #121212;
+            color: white;
+            font-family: Arial, sans-serif;
+            margin: 40px;
+        }
+
+        .container {
+            background: #1f1f1f;
+            padding: 30px;
+            border-radius: 15px;
+        }
+
+        h2 {
+            color: #ffffff;
+        }
+
+        .note {
+            margin-bottom: 20px;
+            padding: 15px;
+            background-color: #2a2a2a;
+            border-radius: 10px;
+            color: #ccc;
+        }
+
+        .summary {
+            padding: 15px;
+            background-color: #1e3a1e;
+            border-radius: 10px;
+            border-left: 5px solid #28a745;
+            color: #e6ffe6;
+        }
+
+        .btn {
+            margin-top: 20px;
+            padding: 10px 15px;
+            background-color: #0d6efd;
+            color: white;
+            text-decoration: none;
+            border-radius: 8px;
+        }
+
+        .btn:hover {
+            background-color: #0b5ed7;
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="container">
+
+    <h2>Original Note</h2>
+    <div class="note">
+        <p th:text="${note.content}"></p>
+    </div>
+
+    <h2>AI Generated Summary</h2>
+    <div class="summary">
+        <p th:text="${summary}"></p>
+    </div>
+
+    <a href="/MyNotes" class="btn">Back to Notes</a>
+
+</div>
+
+</body>
+</html>

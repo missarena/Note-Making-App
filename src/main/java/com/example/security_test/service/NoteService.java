@@ -29,4 +29,7 @@ public class NoteService {
     }
 
 
+    public Note getNoteById(Long noteId) {
+        return noteRepository.findById(noteId).orElse(null);
+    }
 }

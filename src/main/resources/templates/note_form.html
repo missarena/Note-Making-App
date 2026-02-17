@@ -68,7 +68,7 @@
 <div class="container">
     <div class="card">
         <h2>Add New Note</h2>
-        <form th:action="@{/notes/save}" th:object="${note}" method="post">
+        <form th:action="@{/notes}" th:object="${note}" method="post">
             <input type="text" th:field="*{title}" placeholder="Title" required />
             <textarea th:field="*{content}" placeholder="Write your note here..." rows="6" required></textarea>
             <button type="submit">Save Note</button>
