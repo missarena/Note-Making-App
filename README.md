@@ -1,113 +1,140 @@
-🤖 AI Powered Study Assistant
+# 🤖 AI Powered Study Assistant
 
-An intelligent and scalable AI Powered Study Assistant built using Spring Boot, Spring Security, Thymeleaf, and MySQL.
+An intelligent and scalable **AI Powered Study Assistant** built using Spring Boot, Spring Security, Thymeleaf, and MySQL.
 
-This platform is designed as a modular academic system where content management is one of the core features, with future expansion planned toward AI-driven learning tools such as summarization, recommendations, and chatbot assistance.
+This platform is designed as a modular academic system where study content management is one of the core features, with future expansion toward AI-driven learning tools like summarization, recommendations, and chatbot assistance.
 
-🚀 Features
-🔐 Authentication & Authorization
+---
 
-User Registration & Login
+# 📌 Overview
 
-Role-Based Access Control (USER / ADMIN)
+The AI Powered Study Assistant is a role-based web application designed to help users manage study-related content securely and efficiently.
 
-BCrypt password encryption
+It follows a clean MVC architecture and implements secure authentication and authorization using Spring Security.
 
-Secure session management
+The system is designed to scale into a complete AI-driven academic assistant.
 
-Role-based login redirection
+---
 
-📝 Study Content Module
+# 🚀 Features
 
-Create study entries
+## 🔐 Authentication & Authorization
+- User Registration
+- Login System
+- Role-Based Access Control (USER / ADMIN)
+- BCrypt Password Encryption
+- Secure Session Management
+- Role-based Redirection after Login
 
-Edit entries
+## 📝 Study Content Module
+- Create Study Entries
+- Edit Entries
+- Delete Entries
+- View Individual Entries
+- Search Functionality
+- User-specific Content Access
 
-Delete entries
+## 👑 Admin Dashboard
+- View All Registered Users
+- Monitor All Study Entries
+- Restricted Admin Endpoints
+- Full System Management
 
-View individual entries
+---
 
-Search functionality
+# 🏗️ System Architecture
 
-User-specific content management
+This project follows a Layered MVC Architecture:
 
-👑 Admin Dashboard
+- Controller Layer → Handles HTTP Requests
+- Service Layer → Business Logic
+- Repository Layer → Database Interaction
+- Entity Layer → JPA Models
+- Configuration Layer → Security & Application Setup
 
-View all registered users
+---
 
-Monitor all study content
+# 🛠️ Tech Stack
 
-Access restricted admin endpoints
+- Backend: Spring Boot
+- Security: Spring Security
+- Frontend: Thymeleaf, HTML, CSS, Bootstrap
+- Database: MySQL
+- ORM: Spring Data JPA (Hibernate)
+- Build Tool: Maven
 
-Full system-level management
+---
 
-🏗️ Tech Stack
+# 📂 Project Structure
 
-Backend: Spring Boot
+AI-Powered-Study-Assistant/
+│
+├── src/
+│   ├── main/
+│   │   ├── java/com/example/
+│   │   │   ├── controllers/
+│   │   │   ├── service/
+│   │   │   ├── repository/
+│   │   │   ├── Entity/
+│   │   │   ├── securityConfig
+|   |   |   |--customeSuccessHandler
+│   │   │   └── AiPoweredStudyAssistantApplication.java
+│   │   │
+│   │   └── resources/
+│   │       ├── templates/
+│   │       ├── static/
+│   │       ├── application.properties
+│   │
+│   └── test/
+│
+├── pom.xml
+├── README.md
+└── .gitignore
 
-Security: Spring Security
+---
 
-Frontend: Thymeleaf, HTML, CSS, Bootstrap
+# 🔄 Role-Based Workflow
 
-Database: MySQL
+## USER
+- Access personal dashboard
+- Manage own study content
+- Perform search operations
+- Redirected to /home after login
 
-ORM: Spring Data JPA (Hibernate)
+## ADMIN
+- Access admin dashboard
+- View and manage all users
+- Monitor all study content
+- Redirected to /admin/dashboard after login
 
-Build Tool: Maven
+---
 
-🗂️ Project Structure
-src/
- ├── controller/
- ├── service/
- ├── repository/
- ├── entity/
- ├── config/
- └── templates/
+# 🔐 Security Implementation
 
-Controller → Handles HTTP requests
-
-Service → Business logic
-
-Repository → Database layer
-
-Entity → JPA models
-
-Config → Security & application configuration
-
-🔄 Role-Based Workflow
-👤 USER
-
-Access personal dashboard
-
-Manage personal study content
-
-Perform search operations
-
-Redirected to /home after login
-
-👑 ADMIN
-
-Access admin dashboard
-
-View and manage all users
-
-Monitor all study entries
-
-Redirected to /admin/dashboard after login
-
-🔐 Security Highlights
-
-Custom UserDetailsService
-
-BCrypt Password Encoder
-
-Role-based endpoint protection
-
-CSRF protection enabled
-
-Secure authentication flow
+- Custom UserDetailsService
+- BCrypt Password Encoder
+- Role-based URL Authorization
+- CSRF Protection Enabled
+- Secure Authentication Flow
 
 Example Security Configuration:
 
+```
 .requestMatchers("/admin/**").hasRole("ADMIN")
 .requestMatchers("/user/**").hasRole("USER")
+```
+
+# 🧠 Future Enhancements
+
+- AI-based Content Summarization
+- Smart Question Generator
+- Personalized Study Recommendations
+- Performance Analytics Dashboard
+- AI Chatbot Integration
+- File & PDF Analysis
+- REST API with JWT Authentication
+- Cloud Deployment
+
+---
+
+
