@@ -36,4 +36,8 @@ public class NoteService {
     public List<Note> searchByTitle(User user, String keyword) {
         return noteRepository.findByUserAndTitleContainingIgnoreCase(user,keyword);
     }
+
+    public List<Note> findAll() {
+       return noteRepository.findAll();
+    }
 }

@@ -49,10 +49,16 @@ public class userController {
             model.addAttribute("error", "Username already exists");
             return "register";
         }
+
         User user = new User();
         user.setUsername(username);
+        user.setRole("ROLE_USER");
         user.setPassword(passwordEncoder.encode(password));
-
+        if(username.equals("admin")){
+            user.setRole("ROLE_ADMIN");
+        } else {
+            user.setRole("ROLE_USER");
+        }
         userService.saveUser(user);
 
         return "redirect:/login";

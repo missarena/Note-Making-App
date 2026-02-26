@@ -1,5 +1,6 @@
 package com.example.security_test;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -22,6 +23,9 @@ public class securityConfig {
         return new BCryptPasswordEncoder();
     }
 
+    @Autowired
+    private CustomSuccessHandler customSuccessHandler;
+
 //    @Bean
 //    public UserDetailsService userDetailsService(PasswordEncoder encoder) {
 //        UserDetails user = User.withUsername("user")
@@ -39,11 +43,13 @@ public class securityConfig {
                 .csrf(csrf -> csrf.disable())
                 .authorizeHttpRequests(auth -> auth
                         .requestMatchers("/register","/user_register","/login", "/css/**").permitAll()
+                        .requestMatchers("/admin/**").hasRole("ADMIN")
+                        .requestMatchers("/MyNotes").hasAnyRole("USER","ADMIN")
                         .anyRequest().authenticated()
                 )
                 .formLogin(form -> form
                         .loginPage("/login")
-                        .defaultSuccessUrl("/dashboard", true)
+                        .successHandler(customSuccessHandler)
                         .permitAll()
                 )
                 .logout(logout -> logout

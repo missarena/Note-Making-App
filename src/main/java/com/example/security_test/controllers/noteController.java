@@ -87,4 +87,13 @@ public class noteController {
         model.addAttribute("note", note);
         return "view-note";
     }
+
+    @GetMapping("/admin/all-notes")
+    public String allNotes(Model model) {
+
+        List<Note> notes = noteService.findAll();
+        model.addAttribute("notes", notes);
+
+        return "admin-notes";
+    }
 }

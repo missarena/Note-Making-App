@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Admin Panel | StudyIt</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Bootstrap -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+    <style>
+        body {
+            background-color: #121212;
+            color: white;
+        }
+
+        .sidebar {
+            min-height: 100vh;
+            background: #1f1f1f;
+        }
+
+        .sidebar a {
+            color: white;
+            text-decoration: none;
+            display: block;
+            padding: 12px;
+            border-radius: 8px;
+            margin-bottom: 4px;
+        }
+
+        .sidebar a:hover {
+            background: rgba(255,255,255,0.2);
+        }
+
+        .note-card {
+            border-radius: 15px;
+            margin-bottom: 20px;
+            background-color: #1f1f1f;
+            padding: 20px;
+        }
+
+        .note-card h5 {
+            color: #fff;
+        }
+
+        .note-card p {
+            color: #ccc;
+        }
+
+        .badge-user {
+            background-color: #0d6efd;
+        }
+    </style>
+</head>
+
+<body>
+
+<!-- NAVBAR -->
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <div class="container-fluid">
+        <span class="navbar-brand">
+            Admin Panel - StudyIt
+        </span>
+        <a th:href="@{/logout}" class="btn btn-outline-light btn-sm">Logout</a>
+    </div>
+</nav>
+
+<div class="container-fluid">
+    <div class="row">
+
+        <!-- SIDEBAR -->
+        <div class="col-md-2 sidebar p-3">
+            <h5 class="mb-4">Admin Dashboard</h5>
+            <a th:href="@{/admin/all-notes}">📒 All Notes</a>
+            <a th:href="@{/MyNotes}">👤 My Notes</a>
+        </div>
+
+        <!-- MAIN CONTENT -->
+        <div class="col-md-10 p-4">
+
+            <h3>All Users Notes</h3>
+
+            <div th:if="${#lists.isEmpty(notes)}">
+                <p>No notes available.</p>
+            </div>
+
+            <div class="row" th:each="note : ${notes}">
+                <div class="col-md-6">
+                    <div class="note-card">
+
+                        <!-- Title + Owner -->
+                        <div class="d-flex justify-content-between align-items-center">
+                            <h5 class="mb-0" th:text="${note.title}">Note Title</h5>
+
+                            <span class="badge badge-user"
+                                  th:text="${note.user.username}">
+                                username
+                            </span>
+                        </div>
+
+                        <p class="mt-2"
+                           th:text="${#strings.abbreviate(note.content, 200)}">
+                        </p>
+
+                        <div class="mt-2">
+                            <a th:href="@{/notes/view/{id}(id=${note.id})}"
+                               class="btn btn-sm btn-outline-light">
+                                <i class="fa-solid fa-eye"></i> View
+                            </a>
+
+                            <a th:href="@{/notes/edit/{id}(id=${note.id})}"
+                               class="btn btn-sm btn-outline-primary">
+                                Edit
+                            </a>
+
+                            <a th:href="@{/notes/delete/{id}(id=${note.id})}"
+                               class="btn btn-sm btn-outline-danger">
+                                Delete
+                            </a>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
