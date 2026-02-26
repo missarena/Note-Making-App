@@ -29,14 +29,21 @@ public class noteController {
         return "redirect:/dashboard";
     }
 
+
     //get all notes of user
     @GetMapping("/MyNotes")
-    public String MyNotes(Model model, Principal principal) {
+    public String MyNotes(@RequestParam(required = false)String keyword, Model model, Principal principal) {
         User user = userService.findByUsername(principal.getName());
-        List<Note> notes = noteService.findByUser(user);
+        List<Note> notes;
+        if(keyword != null&& !keyword.isEmpty()) {
+            notes=noteService.searchByTitle(user,keyword);
+        }else{
+            notes=noteService.findByUser(user);
+        }
         model.addAttribute("notes", notes);
         model.addAttribute("username", user.getUsername());
-        return "dashboard";
+        model.addAttribute("keyword", keyword);
+        return "MyNotes";
     }
 
     //add new note form
@@ -71,5 +78,13 @@ public class noteController {
         Note note = noteService.findById(id);
         noteService.delete(id);
         return "redirect:/dashboard";
+    }
+
+    //view full note
+    @GetMapping("/notes/view/{id}")
+    public String viewNote(@PathVariable Long id, Model model) {
+        Note note = noteService.getNoteById(id);
+        model.addAttribute("note", note);
+        return "view-note";
     }
 }

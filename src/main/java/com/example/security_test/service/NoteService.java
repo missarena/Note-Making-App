@@ -32,4 +32,8 @@ public class NoteService {
     public Note getNoteById(Long noteId) {
         return noteRepository.findById(noteId).orElse(null);
     }
+
+    public List<Note> searchByTitle(User user, String keyword) {
+        return noteRepository.findByUserAndTitleContainingIgnoreCase(user,keyword);
+    }
 }
